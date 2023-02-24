@@ -1,0 +1,25 @@
+[package]
+name = "dns_name"
+authors = ["BlueCat Networks <support@bluecatnetworks.com>"]
+description = "DNS name parsing with public suffix lookup"
+version = "0.1.0"
+edition = "2021"
+# These URLs point to more information about the repository
+documentation = "https://docs.rs/dns_name"
+repository = "https://github.com/bluecatengineering/dns_name"
+# This points to a file in the repository (relative to this Cargo.toml). The
+# contents of this file are stored and indexed in the registry.
+readme = "README.md"
+# This is a small list of keywords used to categorize and search for this
+# package.
+# keywords = ["dns", "parser"]
+categories = ["network-programming", "data-structures"]
+# This is a string description of the license for this package. Currently
+# crates.io will validate the license provided against a whitelist of known
+# license identifiers from https://spdx.org/licenses/. Multiple licenses can
+# be separated with a `/`
+license = "MIT"
+
+[dependencies]
+trust-dns-proto = { version = "0.22.0", features = ["dnssec"] }
+
