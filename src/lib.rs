@@ -178,7 +178,7 @@ impl List {
     /// [`Name`]: trust_dns_proto::rr::domain::Name
     pub fn from_trustdns_name(
         &self,
-        name: &trust_dns_proto::rr::domain::Name,
+        name: &hickory_proto::rr::domain::Name,
     ) -> io::Result<DnsName> {
         self.parse_dns_name(&name.to_ascii())
     }
@@ -420,8 +420,8 @@ mod unit_tests {
 
     #[test]
     fn trustdns() -> Result<(), std::io::Error> {
+        use hickory_proto::rr::domain::Name;
         use std::str::FromStr;
-        use trust_dns_proto::rr::domain::Name;
         let list = List::from_path("suffix-list.txt").unwrap();
 
         let domain = list.from_trustdns_name(&Name::from_str("a.b.c").unwrap())?;
