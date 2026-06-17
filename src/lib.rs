@@ -172,16 +172,6 @@ impl List {
     pub fn parse_dns_name(&self, domain: &str) -> io::Result<DnsName> {
         DnsName::parse(domain, self)
     }
-
-    /// Converts a TrustDNS [`Name`] into a `DnsName`
-    ///
-    /// [`Name`]: trust_dns_proto::rr::domain::Name
-    pub fn from_trustdns_name(
-        &self,
-        name: &hickory_proto::rr::domain::Name,
-    ) -> io::Result<DnsName> {
-        self.parse_dns_name(&name.to_ascii())
-    }
 }
 
 impl std::str::FromStr for List {
@@ -424,14 +414,14 @@ mod unit_tests {
         use std::str::FromStr;
         let list = List::from_path("suffix-list.txt").unwrap();
 
-        let domain = list.from_trustdns_name(&Name::from_str("a.b.c").unwrap())?;
+        let domain = list.parse_dns_name(&Name::from_str("a.b.c").unwrap().to_ascii())?;
         assert_eq!(domain.name(), "a.b.c");
         assert_eq!(domain.rname(), "c.b.a");
         assert_eq!(domain.root(), Some("b.c"));
         assert_eq!(domain.suffix(), Some("c"));
 
         // conversion to ascii
-        let domain = list.from_trustdns_name(&Name::from_str("a.♥").unwrap())?;
+        let domain = list.parse_dns_name(&Name::from_str("a.♥").unwrap().to_ascii())?;
         assert_eq!(domain.name(), "a.xn--g6h");
         assert_eq!(domain.root(), Some("a.xn--g6h"));
         assert_eq!(domain.suffix(), Some("xn--g6h"));

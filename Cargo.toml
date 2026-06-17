@@ -20,5 +20,5 @@ categories = ["network-programming", "data-structures"]
 # be separated with a `/`
 license = "MIT"
 
-[dependencies]
-hickory-proto = { version = "0.25.1", features = ["dnssec-ring"] }
+[dev-dependencies]
+hickory-proto = { version = "0.26.0", features = ["dnssec-ring"] }
