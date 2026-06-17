@@ -2,7 +2,7 @@
 name = "dns_name"
 authors = ["BlueCat Networks <support@bluecatnetworks.com>"]
 description = "DNS name parsing with public suffix lookup"
-version = "2.0.0"
+version = "3.0.0"
 edition = "2021"
 # These URLs point to more information about the repository
 documentation = "https://docs.rs/dns_name"
@@ -20,5 +20,5 @@ categories = ["network-programming", "data-structures"]
 # be separated with a `/`
 license = "MIT"
 
-[dependencies]
-hickory-proto = { version = "0.25.1", features = ["dnssec-ring"] }
+[dev-dependencies]
+hickory-proto = { version = "0.26.0", features = ["dnssec-ring"] }
